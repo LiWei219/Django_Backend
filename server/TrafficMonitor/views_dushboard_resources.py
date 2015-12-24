@@ -1,12 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import redis
+import json
+from rest_framework.parsers import JSONParser
 # Create your views here.
-
+from django.http import HttpResponse
 class RealtimeApplicationThroughput(APIView):
+	parser_classes = (JSONParser,)
 	def get(self, request, format=None):
-		
+		callback = request.GET.get('callback','logIt')	
+		#print callback
 		data = []
+		#r = redis.Redis(host='166.111.143.200', port=6379, db=0)
 		r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
 		line1 = r.get('throuput')
 		line2 = r.get('countPacket')
@@ -21,7 +26,80 @@ class RealtimeApplicationThroughput(APIView):
 			body['countPacket'] = array2[i]
 			data.append(body)
 			#print data
-		return Response(data)
+		D = '%s(%s)'%(callback, json.dumps(data))
+		#D = '%s(%s)'%(callback, '{"username":"jack","age":21,"gender":"male"}')
+		#print D
+		#return Response(data)
+		#return HttpResponse(D, content_type="application/json;charset=utf-8")
+		return HttpResponse(D, content_type="application/json")
+
+class RealtimeApplicationThroughput_Throuput_Second(APIView):
+        parser_classes = (JSONParser,)
+        def get(self, request, format=None):
+                callback = request.GET.get('callback','logIt')
+                data = []
+                r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
+                line = r.get('throuput_second')
+                array = line.split('/')
+
+                for i in range(1,len(array)):
+                        body = {}
+                        body['throuput'] = array[i]
+                        data.append(body)
+                        #print data
+                D = '%s(%s)'%(callback, json.dumps(data))
+                return HttpResponse(D, content_type="application/json")
+
+class RealtimeApplicationThroughput_Throuput_Minute(APIView):
+        parser_classes = (JSONParser,)
+        def get(self, request, format=None):
+                callback = request.GET.get('callback','logIt')
+                data = []
+                r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
+                line = r.get('throuput_minute')
+                array = line.split('/')
+
+                for i in range(1,len(array)):
+                        body = {}
+                        body['throuput'] = array[i]
+                        data.append(body)
+                        #print data
+                D = '%s(%s)'%(callback, json.dumps(data))
+                return HttpResponse(D, content_type="application/json")
+
+class RealtimeApplicationThroughput_CountPacket_Second(APIView):
+        parser_classes = (JSONParser,)
+        def get(self, request, format=None):
+                callback = request.GET.get('callback','logIt')
+                data = []
+                r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
+                line = r.get('countPacket_second')
+                array = line.split('/')
+
+                for i in range(1,len(array)):
+                        body = {}
+                        body['countPacket'] = array[i]
+                        data.append(body)
+                        #print data
+                D = '%s(%s)'%(callback, json.dumps(data))
+                return HttpResponse(D, content_type="application/json")
+
+class RealtimeApplicationThroughput_CountPacket_Minute(APIView):
+        parser_classes = (JSONParser,)
+        def get(self, request, format=None):
+                callback = request.GET.get('callback','logIt')
+                data = []
+                r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
+                line = r.get('countPacket_minute')
+                array = line.split('/')
+
+                for i in range(1,len(array)):
+                        body = {}
+                        body['countPacket'] = array[i]
+                        data.append(body)
+                        #print data
+                D = '%s(%s)'%(callback, json.dumps(data))
+                return HttpResponse(D, content_type="application/json")
 
 class RealtimeApplicationDataPacket(APIView):
 	def get(self, request, format=None):
