@@ -57,6 +57,12 @@ urlpatterns += [
 urlpatterns += [
     #dushboard_resources
     url(r'^RealtimeApplicationThroughput/$', RealtimeApplicationThroughput.as_view()),
+    url(r'^RealtimeApplicationThroughput/Throuput_Second$', RealtimeApplicationThroughput_Throuput_Second.as_view()),
+    url(r'^RealtimeApplicationThroughput/Throuput_Minute$', RealtimeApplicationThroughput_Throuput_Minute.as_view()),
+    url(r'^RealtimeApplicationThroughput/CountPacket_Second$', RealtimeApplicationThroughput_CountPacket_Second.as_view()),
+    url(r'^RealtimeApplicationThroughput/CountPacket_Minute$', RealtimeApplicationThroughput_CountPacket_Minute.as_view()),
+    url(r'^RealtimeApplicationThroughput/Minute$', RealtimeApplicationThroughput_Minute.as_view()),
+    url(r'^RealtimeApplicationThroughput/Second$', RealtimeApplicationThroughput_Second.as_view()),
     url(r'^RealtimeApplicationDataPacket/$', RealtimeApplicationDataPacket.as_view()),
     url(r'^RealtimeApplicationStream/$', RealtimeApplicationStream.as_view()),
     url(r'^RealtimeSourceCountryThroughput/$', RealtimeSourceCountryThroughput.as_view()),

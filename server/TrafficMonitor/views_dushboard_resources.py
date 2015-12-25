@@ -101,6 +101,44 @@ class RealtimeApplicationThroughput_CountPacket_Minute(APIView):
                 D = '%s(%s)'%(callback, json.dumps(data))
                 return HttpResponse(D, content_type="application/json")
 
+class RealtimeApplicationThroughput_Minute(APIView):
+        parser_classes = (JSONParser,)
+        def get(self, request, format=None):
+                callback = request.GET.get('callback','logIt')
+                data = []
+                r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
+                line1 = r.get('countPacket_minute')
+                line2 = r.get('throuput_minute')
+                array1 = line1.split('/')
+                array2 = line2.split('/')
+                for i in range(1,len(array1)):
+                        body = {}
+                        body['countPacket'] = array1[i]
+                        body['throuput'] = array2[i]
+                        data.append(body)
+                        #print data
+                D = '%s(%s)'%(callback, json.dumps(data))
+                return HttpResponse(D, content_type="application/json")
+
+class RealtimeApplicationThroughput_Second(APIView):
+        parser_classes = (JSONParser,)
+        def get(self, request, format=None):
+                callback = request.GET.get('callback','logIt')
+                data = []
+                r = redis.Redis(host='2001:da8:a0:500::1:7', port=6379, db=0)
+                line1 = r.get('countPacket_second')
+                line2 = r.get('throuput_second')
+                array1 = line1.split('/')
+                array2 = line2.split('/')
+                for i in range(1,len(array1)):
+                        body = {}
+                        body['countPacket'] = array1[i]
+                        body['throuput'] = array2[i]
+                        data.append(body)
+                        #print data
+                D = '%s(%s)'%(callback, json.dumps(data))
+                return HttpResponse(D, content_type="application/json")
+
 class RealtimeApplicationDataPacket(APIView):
 	def get(self, request, format=None):
 		#
