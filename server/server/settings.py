@@ -45,10 +45,17 @@ INSTALLED_APPS = (
     'ClusterManager'
 )
 
+'''
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+  }
+'''
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#   'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -84,17 +91,17 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER':'root',
-	'PASSWORD':'root',
-	'NAME':'mysql',
-	'HOST':'localhost'
+	    'PASSWORD':'admin',
+	    'NAME':'big',
+	    'HOST':'localhost'
     }
 }
 
-REST_FRAMEWORK = {
+'''REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
+       'rest_framework.parsers.JSONParser',
     )
-}
+} '''
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

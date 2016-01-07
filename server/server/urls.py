@@ -13,11 +13,14 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
+admin.autodiscover()
 #user_views
-from users.views_user_operation import *
+
 from users.views import *
+from django.conf.urls import patterns, url
+from users import views
 #TrafficMonitor_views
 from TrafficMonitor.views_dushboard_resources import *
 from TrafficMonitor.views_resource_list import *
@@ -40,29 +43,16 @@ urlpatterns = [
 
 #Useroperation
 urlpatterns += [
-    url(r'^users/$', User_list.as_view()),
-    #user_operation
-    url(r'^OperatorLogin/$', OperatorLogin.as_view()),
-    url(r'^OperatorChgPsw/', OperatorChgPsw.as_view()),
-    url(r'^OperatorReg/', OperatorReg.as_view()),
-    url(r'^AdminLogin/', AdminLogin.as_view()),
-    url(r'^AdminChgPsw/', AdminChgPsw.as_view()),
-    url(r'^AdminReg/', AdminReg.as_view()),
-    url(r'^ResearcherLogin/', ResearcherLogin.as_view()),
-    url(r'^ResearcherChgPsw/', ResearcherChgPsw.as_view()),
-    url(r'^ResearcherReg/', ResearcherReg.as_view()),
+
+    url(r'^login/$', login.as_view()),
+    url(r'^regist/$', regist.as_view()),
+
 ]
 
 #TrafficMonitor
 urlpatterns += [
     #dushboard_resources
     url(r'^RealtimeApplicationThroughput/$', RealtimeApplicationThroughput.as_view()),
-    url(r'^RealtimeApplicationThroughput/Throuput_Second$', RealtimeApplicationThroughput_Throuput_Second.as_view()),
-    url(r'^RealtimeApplicationThroughput/Throuput_Minute$', RealtimeApplicationThroughput_Throuput_Minute.as_view()),
-    url(r'^RealtimeApplicationThroughput/CountPacket_Second$', RealtimeApplicationThroughput_CountPacket_Second.as_view()),
-    url(r'^RealtimeApplicationThroughput/CountPacket_Minute$', RealtimeApplicationThroughput_CountPacket_Minute.as_view()),
-    url(r'^RealtimeApplicationThroughput/Minute$', RealtimeApplicationThroughput_Minute.as_view()),
-    url(r'^RealtimeApplicationThroughput/Second$', RealtimeApplicationThroughput_Second.as_view()),
     url(r'^RealtimeApplicationDataPacket/$', RealtimeApplicationDataPacket.as_view()),
     url(r'^RealtimeApplicationStream/$', RealtimeApplicationStream.as_view()),
     url(r'^RealtimeSourceCountryThroughput/$', RealtimeSourceCountryThroughput.as_view()),

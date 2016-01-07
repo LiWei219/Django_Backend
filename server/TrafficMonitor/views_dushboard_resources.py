@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-import redis
+#import redis
 import json
 from rest_framework.parsers import JSONParser
 # Create your views here.
