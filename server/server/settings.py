@@ -91,9 +91,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER':'root',
-	    'PASSWORD':'admin',
-	    'NAME':'big',
-	    'HOST':'localhost'
+	'PASSWORD':'root',
+	'NAME':'bigdata',
+	'HOST':'localhost'
     }
 }
 
